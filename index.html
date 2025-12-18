@@ -3,294 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KPU Dashboard & Calculator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
-    
+    <title>Layout Sederhana</title>
     <style>
-        :root {
-            --kpu-red: #d32f2f;
-            --kpu-yellow: #fff11a;
-            --bg-blue: #7ba2c7;
-            --card-light: #e8f0f2;
-            --sidebar-width: 260px;
+        /* Atur ulang margin dan padding default */
+        * {
+            margin: 0;
+            padding: 0;
+            /* Memastikan padding dan border termasuk dalam lebar/tinggi elemen */
+            box-sizing: border-box; 
         }
 
         body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-blue);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+            /* Warna latar belakang biru/abu-abu seperti gambar */
+            background-color: #6a8ba8; 
+            font-family: Arial, sans-serif;
+            min-height: 100vh; /* Memastikan body mengisi seluruh tinggi viewport */
         }
 
-        /* --- HEADER --- */
-        header {
-            background-color: var(--kpu-red);
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .logo-section { display: flex; align-items: center; gap: 10px; }
-        .logo-section img { height: 35px; }
-
-        /* --- LAYOUT --- */
-        .wrapper { display: flex; flex: 1; overflow: hidden; }
-
-        /* --- SIDEBAR --- */
-        nav {
-            width: var(--sidebar-width);
-            background-color: var(--kpu-yellow);
-            padding-top: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 25px;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .nav-item.active { background-color: rgba(0,0,0,0.1); }
-
-        /* --- MAIN CONTENT --- */
-        main {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .welcome-banner {
-            background-color: #2eb85c;
+        /* --- 1. Header (Merah) --- */
+        .header {
+            background-color: #d90000; /* Warna Merah */
             color: white;
             padding: 15px;
-            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
             font-weight: bold;
         }
 
-        /* DASHBOARD CARDS */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+        /* --- 2. Container Utama (Mengatur Sidebar dan Main Content) --- */
+        .container {
+            /* Menggunakan Flexbox untuk tata letak berdampingan */
+            display: flex; 
+            padding: 20px 0; 
+            /* Mengisi sisa tinggi viewport di bawah header */
+            height: calc(100vh - 58px); /* Asumsi tinggi header sekitar 58px */
         }
 
+        /* --- 3. Sidebar (Kuning) --- */
+        .sidebar {
+            background-color: #ffff00; /* Warna Kuning */
+            width: 25%; /* Mengatur lebar sidebar */
+            margin-left: 20px; /* Jarak dari kiri layar */
+            min-height: 100%; /* Memastikan tingginya sama dengan container */
+        }
+
+        /* --- 4. Main Content (Area Konten Utama) --- */
+        .main-content {
+            /* Warna latar belakang yang sama dengan body (biru/abu-abu) */
+            flex-grow: 1; /* Mengambil sisa ruang yang tersedia */
+            padding: 0 20px; /* Padding di sekitar kotak hijau */
+            
+            /* Mengatur tata letak 2x2 untuk kotak-kotak di dalamnya menggunakan Grid */
+            display: grid;
+            /* Dua kolom dengan lebar yang sama (fraksi) */
+            grid-template-columns: 1fr 1fr; 
+            /* Dua baris, agar kotak mengisi ruang vertikal */
+            grid-template-rows: 1fr 1fr; 
+            /* Jarak (gap) antar kotak hijau */
+            gap: 15px; 
+        }
+
+        /* --- 5. Kotak Konten (Hijau) --- */
         .card {
-            background: var(--card-light);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .card h3 { margin: 0; font-size: 16px; color: #555; }
-        .card .big-val { font-size: 32px; font-weight: bold; margin: 10px 0; }
-
-        /* BOTTOM SECTION: TABLE & CALCULATOR */
-        .bottom-section {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
-
-        /* TABLE STYLE */
-        .table-container {
-            background: white;
-            padding: 15px;
-            border-radius: 15px;
-            overflow-x: auto;
-        }
-
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        th { background: #eee; padding: 10px; text-align: left; }
-        td { padding: 8px; border-bottom: 1px solid #ddd; }
-
-        /* CALCULATOR STYLE (Neumorphism) */
-        .calc-box {
-            background: #e9eef3;
-            padding: 15px;
-            border-radius: 20px;
-            box-shadow: 8px 8px 16px #cfd6dd, -8px -8px 16px #ffffff;
-            max-width: 300px;
-        }
-
-        #screen {
-            width: 100%;
-            height: 40px;
-            border: none;
-            background: #e9eef3;
-            box-shadow: inset 4px 4px 8px #cfd6dd, inset -4px -4px 8px #ffffff;
-            border-radius: 10px;
-            text-align: right;
-            padding: 5px 10px;
-            font-size: 18px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        .calc-btns {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .calc-btns button {
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            background: #e9eef3;
-            box-shadow: 3px 3px 6px #cfd6dd, -3px -3px 6px #ffffff;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .calc-btns button:active { box-shadow: inset 2px 2px 5px #cfd6dd; }
-        .btn-op { color: #d32f2f; }
-        .btn-eq { background: var(--kpu-red) !important; color: white; }
-
-        @media (max-width: 1024px) {
-            .bottom-section { grid-template-columns: 1fr; }
-            .wrapper { flex-direction: column; }
-            nav { width: 100%; padding: 0; display: flex; overflow-x: auto; }
+            background-color: #008000; /* Warna Hijau */
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="logo-section">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/KPU_Logo.svg" alt="KPU">
-            <h2 style="margin:0; font-size: 18px;">Dashboard Analysis Data KPU</h2>
-        </div>
-        <div class="header-icons">
-            <i class="fas fa-list"></i> &nbsp; <i class="fas fa-user-circle"></i>
-        </div>
-    </header>
-
-    <div class="wrapper">
-        <nav>
-            <a href="#" class="nav-item active"><i class="fas fa-home"></i> &nbsp; Dashboard</a>
-            <a href="#" class="nav-item"><i class="fas fa-map"></i> &nbsp; Data TPS</a>
-            <a href="#" class="nav-item"><i class="fas fa-users"></i> &nbsp; Data Pemilih</a>
-            <a href="#" class="nav-item"><i class="fas fa-box"></i> &nbsp; Logistik</a>
-        </nav>
-
-        <main>
-            <div class="welcome-banner">Ringkasan Data Pemilu 2024</div>
-
-            <div class="grid-cards">
-                <div class="card">
-                    <h3>Total TPS</h3>
-                    <div class="big-val">456</div>
-                    <small>2 Kecamatan, 20 Kelurahan</small>
-                </div>
-                <div class="card">
-                    <h3>Total Pemilih (DPT)</h3>
-                    <div class="big-val">88.900</div>
-                    <small>Status: Siap</small>
-                </div>
-                <div class="card">
-                    <h3>Logistik Terdistribusi</h3>
-                    <div class="big-val">95%</div>
-                    <small>Update Terakhir: Hari ini</small>
-                </div>
-            </div>
-
-            <div class="bottom-section">
-                <div class="table-container">
-                    <h3 style="margin-top:0">Sebaran TPS Per Kelurahan</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Kecamatan</th>
-                                <th>Kelurahan</th>
-                                <th>TPS</th>
-                                <th>Jarak (Km)</th>
-                                <th>Waktu (Min)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>AMPENAN</td><td>Ampenan Selatan</td><td>26</td><td>9.00</td><td>0.5</td></tr>
-                            <tr><td>AMPENAN</td><td>Ampenan Tengah</td><td>32</td><td>9.00</td><td>0.5</td></tr>
-                            <tr><td>AMPENAN</td><td>Pejeruk</td><td>30</td><td>8.60</td><td>0.3</td></tr>
-                            <tr><td>CAKRANEGARA</td><td>Cakra Selatan</td><td>23</td><td>4.10</td><td>0.18</td></tr>
-                            <tr><td>CAKRANEGARA</td><td>Cakra Barat</td><td>22</td><td>3.30</td><td>0.15</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="calc-box">
-                    <input id="screen" readonly placeholder="0">
-                    <div class="calc-btns">
-                        <button onclick="clearAll()" class="btn-op">AC</button>
-                        <button onclick="back()" class="btn-op">⌫</button>
-                        <button onclick="func('sin(')">sin</button>
-                        <button onclick="insert('/')" class="btn-op">÷</button>
-                        
-                        <button onclick="insert('7')">7</button>
-                        <button onclick="insert('8')">8</button>
-                        <button onclick="insert('9')">9</button>
-                        <button onclick="insert('*')" class="btn-op">×</button>
-                        
-                        <button onclick="insert('4')">4</button>
-                        <button onclick="insert('5')">5</button>
-                        <button onclick="insert('6')">6</button>
-                        <button onclick="insert('-')" class="btn-op">-</button>
-                        
-                        <button onclick="insert('1')">1</button>
-                        <button onclick="insert('2')">2</button>
-                        <button onclick="insert('3')">3</button>
-                        <button onclick="insert('+')" class="btn-op">+</button>
-                        
-                        <button onclick="insert('0')">0</button>
-                        <button onclick="insert('.')">.</button>
-                        <button onclick="calculate()" class="btn-eq" style="grid-column: span 2">=</button>
-                    </div>
-                    <div style="font-size: 10px; margin-top: 10px; color: #888;">
-                        <input type="radio" name="mode" checked> Deg 
-                        <input type="radio" name="mode"> Rad
-                    </div>
-                </div>
-            </div>
-        </main>
+    <div class="header">
+        INI Adalah Halaman Website Saya
     </div>
-
-    <script>
-        let screen = document.getElementById("screen");
-
-        function insert(v) { screen.value += v; }
-        function clearAll() { screen.value = ""; }
-        function back() { screen.value = screen.value.slice(0, -1); }
-        function func(f) { screen.value += f; }
-
-        function toRad(angle) {
-            const isDeg = document.getElementsByName("mode")[0].checked;
-            return isDeg ? angle * (Math.PI / 180) : angle;
-        }
-
-        function calculate() {
-            try {
-                let exp = screen.value
-                    .replace(/sin\(([^)]+)\)/g, (m, a) => `Math.sin(${toRad(eval(a))})`)
-                    .replace(/cos\(([^)]+)\)/g, (m, a) => `Math.cos(${toRad(eval(a))})`);
-                
-                let res = eval(exp);
-                screen.value = Number.isInteger(res) ? res : res.toFixed(4);
-            } catch (e) {
-                screen.value = "Error";
-            }
-        }
-    </script>
+    <div class="container">
+        <div class="sidebar">
+            </div>
+        <div class="main-content">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+    </div>
 </body>
 </html>
