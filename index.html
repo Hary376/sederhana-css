@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Sederhana</title>
+    <style>
+        /* Atur ulang margin dan padding default */
+        * {
+            margin: 0;
+            padding: 0;
+            /* Memastikan padding dan border termasuk dalam lebar/tinggi elemen */
+            box-sizing: border-box; 
+        }
+
+        body {
+            /* Warna latar belakang biru/abu-abu seperti gambar */
+            background-color: #6a8ba8; 
+            font-family: Arial, sans-serif;
+            min-height: 100vh; /* Memastikan body mengisi seluruh tinggi viewport */
+        }
+
+        /* --- 1. Header (Merah) --- */
+        .header {
+            background-color: #d90000; /* Warna Merah */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* --- 2. Container Utama (Mengatur Sidebar dan Main Content) --- */
+        .container {
+            /* Menggunakan Flexbox untuk tata letak berdampingan */
+            display: flex; 
+            padding: 20px 0; 
+            /* Mengisi sisa tinggi viewport di bawah header */
+            height: calc(100vh - 58px); /* Asumsi tinggi header sekitar 58px */
+        }
+
+        /* --- 3. Sidebar (Kuning) --- */
+        .sidebar {
+            background-color: #ffff00; /* Warna Kuning */
+            width: 25%; /* Mengatur lebar sidebar */
+            margin-left: 20px; /* Jarak dari kiri layar */
+            min-height: 100%; /* Memastikan tingginya sama dengan container */
+        }
+
+        /* --- 4. Main Content (Area Konten Utama) --- */
+        .main-content {
+            /* Warna latar belakang yang sama dengan body (biru/abu-abu) */
+            flex-grow: 1; /* Mengambil sisa ruang yang tersedia */
+            padding: 0 20px; /* Padding di sekitar kotak hijau */
+            
+            /* Mengatur tata letak 2x2 untuk kotak-kotak di dalamnya menggunakan Grid */
+            display: grid;
+            /* Dua kolom dengan lebar yang sama (fraksi) */
+            grid-template-columns: 1fr 1fr; 
+            /* Dua baris, agar kotak mengisi ruang vertikal */
+            grid-template-rows: 1fr 1fr; 
+            /* Jarak (gap) antar kotak hijau */
+            gap: 15px; 
+        }
+
+        /* --- 5. Kotak Konten (Hijau) --- */
+        .card {
+            background-color: #008000; /* Warna Hijau */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        INI Adalah Halaman Website Saya
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            </div>
+        <div class="main-content">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+    </div>
+</body>
+</html>
