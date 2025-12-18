@@ -4,7 +4,193 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout Sederhana</title>
+    <style><!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard KPU - Ampenan & Cakranegara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    
     <style>
+        :root {
+            --kpu-red: #d32f2f;
+            --kpu-yellow: #fff11a;
+            --bg-blue: #7ba2c7;
+            --card-light: #e8f0f2;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-blue);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: var(--kpu-red);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo-section { display: flex; align-items: center; gap: 10px; }
+        .logo-section img { height: 35px; }
+
+        .wrapper { display: flex; flex: 1; overflow: hidden; }
+
+        nav {
+            width: 260px;
+            background-color: var(--kpu-yellow);
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-item.active { background-color: rgba(0,0,0,0.1); }
+
+        main {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+        }
+
+        .welcome-banner {
+            background-color: #2eb85c;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-light);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h3 { margin: 0; color: #555; font-size: 16px; }
+        .card .value { font-size: 36px; font-weight: bold; margin: 15px 0; color: #222; }
+
+        .table-section {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #f8f9fa; padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .group-row { background-color: #f1f3f5; font-weight: bold; color: var(--kpu-red); }
+
+        @media (max-width: 768px) {
+            .wrapper { flex-direction: column; }
+            nav { width: 100%; height: auto; display: flex; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-section">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/KPU_Logo.svg" alt="KPU">
+            <h2 style="margin:0; font-size: 20px;">Sistem Informasi Logistik KPU</h2>
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-bell"></i> &nbsp;&nbsp; <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <nav>
+            <a href="#" class="nav-item active"><i class="fas fa-chart-line"></i> &nbsp; Dashboard</a>
+            <a href="#" class="nav-item"><i class="fas fa-map-marker-alt"></i> &nbsp; Sebaran TPS</a>
+            <a href="#" class="nav-item"><i class="fas fa-box-open"></i> &nbsp; Status Logistik</a>
+            <a href="#" class="nav-item"><i class="fas fa-file-download"></i> &nbsp; Unduh Laporan</a>
+        </nav>
+
+        <main>
+            <div class="welcome-banner">
+                <i class="fas fa-info-circle"></i> Ringkasan Data Pemilu - Kota Mataram
+            </div>
+
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>Total TPS Terdata</h3>
+                    <div class="value">456</div>
+                    <small>Ampenan (250) & Cakranegara (206)</small>
+                </div>
+                <div class="card">
+                    <h3>Distribusi Logistik</h3>
+                    <div class="value">95%</div>
+                    <small>Status: Berjalan Lancar</small>
+                </div>
+                <div class="card">
+                    <h3>Partisipasi Target</h3>
+                    <div class="value">78%</div>
+                    <small>Target Nasional: 77.5%</small>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <h3><i class="fas fa-table"></i> Rincian Jarak Tempuh & Logistik TPS</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kecamatan / Kelurahan</th>
+                            <th>Jumlah TPS</th>
+                            <th>Jarak (Km)</th>
+                            <th>Waktu (Menit)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="group-row"><td colspan="2">KECAMATAN AMPENAN</td><td>250</td><td>-</td><td>-</td></tr>
+                        <tr><td>1</td><td>Ampenan Selatan</td><td>26</td><td>9,00</td><td>0.5</td></tr>
+                        <tr><td>2</td><td>Ampenan Tengah</td><td>32</td><td>9,00</td><td>0.5</td></tr>
+                        <tr><td>3</td><td>Pejeruk</td><td>30</td><td>8,60</td><td>0.3</td></tr>
+                        <tr><td>4</td><td>Ampenan Utara</td><td>23</td><td>9,00</td><td>0.5</td></tr>
+                        <tr><td>5</td><td>Taman Sari</td><td>22</td><td>9,60</td><td>0.5</td></tr>
+                        
+                        <tr class="group-row"><td colspan="2">KECAMATAN CAKRANEGARA</td><td>206</td><td>-</td><td>-</td></tr>
+                        <tr><td>1</td><td>Cakranegara Selatan</td><td>23</td><td>4,10</td><td>0,18</td></tr>
+                        <tr><td>2</td><td>Cakranegara Barat</td><td>22</td><td>3,30</td><td>0,15</td></tr>
+                        <tr><td>3</td><td>Cakranegara Timur</td><td>13</td><td>3,20</td><td>0,14</td></tr>
+                        <tr><td>4</td><td>Cakranegara Utara</td><td>18</td><td>2,90</td><td>0,13</td></tr>
+                        <tr><td>5</td><td>Sayang-Sayang</td><td>27</td><td>3,60</td><td>0,17</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
         /* Atur ulang margin dan padding default */
         * {
             margin: 0;
