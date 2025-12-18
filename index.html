@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Logistik KPU - Mataram</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <title>Dashboard Analisis Data KPU - Mataram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
@@ -13,90 +13,84 @@
             --kpu-yellow: #fff11a;
             --bg-blue: #7ba2c7;
             --card-light: #f8fbfd;
-            --text-dark: #2c3e50;
+            --sidebar-yellow: #ffeb3b;
+            --accent-green: #2eb85c;
         }
 
-        * { box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-blue);
-            color: var(--text-dark);
             display: flex;
             flex-direction: column;
             height: 100vh;
+            color: #333;
         }
 
-        /* --- Header --- */
+        /* HEADER */
         header {
             background-color: var(--kpu-red);
             color: white;
-            padding: 0 25px;
-            height: 60px;
+            padding: 12px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             z-index: 100;
         }
 
-        .logo-section { display: flex; align-items: center; gap: 15px; }
-        .logo-section img { height: 35px; }
-        .logo-section h2 { font-size: 1.1rem; margin: 0; letter-spacing: 0.5px; }
+        .logo-section { display: flex; align-items: center; gap: 12px; }
+        .logo-section img { height: 38px; }
+        .header-icons { display: flex; gap: 20px; font-size: 1.2rem; cursor: pointer; }
 
-        /* --- Layout --- */
+        /* MAIN CONTENT */
         .wrapper { display: flex; flex: 1; overflow: hidden; }
 
-        /* --- Sidebar --- */
+        /* SIDEBAR */
         nav {
-            width: 250px;
-            background-color: var(--kpu-yellow);
-            display: flex;
-            flex-direction: column;
+            width: 260px;
+            background-color: var(--sidebar-yellow);
             padding: 20px 0;
             box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
         }
 
+        .nav-group-title { padding: 10px 25px; font-weight: 700; color: #555; font-size: 0.9rem; }
         .nav-item {
             display: flex;
             align-items: center;
-            padding: 15px 25px;
+            padding: 12px 25px;
             color: #333;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
+            font-weight: 500;
+            transition: 0.3s;
             gap: 12px;
         }
 
-        .nav-item:hover, .nav-item.active {
-            background-color: rgba(0,0,0,0.08);
-            color: var(--kpu-red);
-        }
+        .nav-item:hover, .nav-item.active { background-color: rgba(0,0,0,0.08); font-weight: 600; }
 
-        /* --- Main Content --- */
-        main {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
+        /* DASHBOARD AREA */
+        main { flex: 1; padding: 30px; overflow-y: auto; }
 
-        .welcome-banner {
-            background: linear-gradient(135deg, #2eb85c, #1b8a43);
+        .banner {
+            background-color: var(--accent-green);
             color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* --- Cards --- */
+        /* CARDS GRID */
         .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -104,38 +98,35 @@
         .card {
             background: var(--card-light);
             padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border-top: 4px solid var(--kpu-red);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
         }
 
-        .card h3 { margin: 0; color: #7f8c8d; font-size: 0.9rem; text-transform: uppercase; }
-        .card .value { font-size: 2.2rem; font-weight: 700; margin: 10px 0; color: var(--text-dark); }
-        .card small { color: #95a5a6; font-size: 0.8rem; }
+        .card h3 { color: #666; font-size: 0.9rem; margin-bottom: 10px; }
+        .card .big-value { font-size: 2.2rem; font-weight: 700; color: #222; margin-bottom: 5px; }
+        .card .sub-info { font-size: 0.85rem; color: #888; }
 
-        /* --- Table Section --- */
+        /* DATA TABLE SECTION */
         .table-section {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 25px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .table-section h3 { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
 
         .table-responsive { overflow-x: auto; }
-
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th { background: #f8f9fa; padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid #dee2e6; }
-        td { padding: 12px 15px; border-bottom: 1px solid #f1f1f1; }
-        
-        .group-row { background-color: #fcfcfc; font-weight: 700; color: var(--kpu-red); }
-        .group-row td { border-bottom: 2px solid #eee; padding-top: 20px; }
+        table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        th { background: #f4f6f9; padding: 15px; text-align: left; font-weight: 600; border-bottom: 2px solid #eee; }
+        td { padding: 12px 15px; border-bottom: 1px solid #f1f1f1; font-size: 0.95rem; }
+        .group-header { background-color: #fef9c3; font-weight: 700; color: var(--kpu-red); }
 
         @media (max-width: 992px) {
             .wrapper { flex-direction: column; }
-            nav { width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; padding: 0; }
-            .nav-item { flex: 1; justify-content: center; padding: 12px; font-size: 0.8rem; }
+            nav { width: 100%; flex-direction: row; overflow-x: auto; padding: 0; }
+            .nav-item { padding: 15px; white-space: nowrap; }
             main { padding: 15px; }
         }
     </style>
@@ -144,137 +135,86 @@
 
     <header>
         <div class="logo-section">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/KPU_Logo.svg" alt="KPU Logo">
-            <h2>DASHBOARD LOGISTIK KPU</h2>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/KPU_Logo.svg" alt="Logo KPU">
+            <h2>Dashboard Analysis Data KPU</h2>
         </div>
         <div class="header-icons">
-            <button style="background:none; border:none; color:white; cursor:pointer;"><i class="fas fa-bell fa-lg"></i></button>
-            &nbsp;&nbsp;
-            <i class="fas fa-user-circle fa-lg"></i>
+            <i class="fas fa-list"></i>
+            <i class="fas fa-user-circle"></i>
+            <i class="fas fa-cog"></i>
         </div>
     </header>
 
     <div class="wrapper">
         <nav>
-            <a href="#" class="nav-item active"><i class="fas fa-chart-pie"></i> Dashboard</a>
-            <a href="#" class="nav-item"><i class="fas fa-map-location-dot"></i> Sebaran TPS</a>
-            <a href="#" class="nav-item"><i class="fas fa-truck-ramp-box"></i> Status Logistik</a>
-            <a href="#" class="nav-item"><i class="fas fa-file-pdf"></i> Unduh Data</a>
+            <div class="nav-group-title">Menu Utama</div>
+            <a href="#" class="nav-item active"><i class="fas fa-home"></i> Dashboard Utama</a>
+            <a href="#" class="nav-item"><i class="fas fa-th-large"></i> Data TPS</a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i> Data Pemilih</a>
+            <a href="#" class="nav-item"><i class="fas fa-box"></i> Logistik</a>
+            <a href="#" class="nav-item"><i class="fas fa-map-marked-alt"></i> Pemetaan</a>
         </nav>
 
         <main>
-            <div class="welcome-banner">
-                <i class="fas fa-circle-check fa-2xl"></i>
-                <div>
-                    <strong>Data Terverifikasi</strong><br>
-                    Ringkasan logistik wilayah Kota Mataram - Pemilu 2024
-                </div>
+            <div class="banner">
+                <i class="fas fa-chart-line"></i> Ringkasan Data Pemilu 2024
             </div>
 
             <div class="grid-cards">
                 <div class="card">
                     <h3>Total TPS</h3>
-                    <div class="value">456</div>
-                    <small><i class="fas fa-building"></i> 2 Kecamatan Terdaftar</small>
+                    <div class="big-value">456 TPS</div>
+                    <div class="sub-info">2 Kecamatan, 20 Kelurahan</div>
                 </div>
                 <div class="card">
-                    <h3>Progres Distribusi</h3>
-                    <div class="value">95%</div>
-                    <small><i class="fas fa-clock"></i> Diperbarui 5 menit yang lalu</small>
+                    <h3>Total Pemilih (DPT)</h3>
+                    <div class="big-value">88.900 Jiwa</div>
+                    <div class="sub-info">Status: Siap</div>
                 </div>
                 <div class="card">
-                    <h3>Partisipasi</h3>
-                    <div class="value">78%</div>
-                    <small><i class="fas fa-bullseye"></i> Target: 77.5%</small>
+                    <h3>Logistik Terdistribusi</h3>
+                    <div class="big-value">95%</div>
+                    <div class="sub-info">Target Selesai: H-1</div>
+                </div>
+                <div class="card">
+                    <h3>Partisipasi Pemilih</h3>
+                    <div class="big-value">78%</div>
+                    <div class="sub-info">Target Nasional</div>
                 </div>
             </div>
 
             <div class="table-section">
-                <h3><i class="fas fa-list-check"></i> Rincian Kelurahan & Logistik</h3>
+                <h3><i class="fas fa-table"></i> Rincian Sebaran TPS & Jarak Tempuh</h3>
                 <div class="table-responsive">
-                    <table id="tpsTable">
+                    <table>
                         <thead>
                             <tr>
-                                <th style="width: 50px;">No</th>
-                                <th>Wilayah</th>
+                                <th>No</th>
+                                <th>Kecamatan / Kelurahan</th>
                                 <th>Jumlah TPS</th>
-                                <th>Jarak (Km)</th>
+                                <th>Jarak (km)</th>
                                 <th>Waktu (Menit)</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBody">
-                            </tbody>
+                        <tbody id="data-body">
+                            <tr class="group-header"><td colspan="2">KECAMATAN AMPENAN</td><td>250</td><td colspan="2"></td></tr>
+                            <tr><td>1</td><td>Ampenan Selatan</td><td>26</td><td>9,00</td><td>0.5</td></tr>
+                            <tr><td>2</td><td>Ampenan Tengah</td><td>32</td><td>9,00</td><td>0.5</td></tr>
+                            <tr><td>3</td><td>Pejeruk</td><td>30</td><td>8,60</td><td>0.3</td></tr>
+                            <tr><td>4</td><td>Ampenan Utara</td><td>23</td><td>9,00</td><td>0.5</td></tr>
+                            <tr><td>5</td><td>Taman Sari</td><td>22</td><td>9,60</td><td>0.5</td></tr>
+                            <tr class="group-header"><td colspan="2">KECAMATAN CAKRANEGARA</td><td>206</td><td colspan="2"></td></tr>
+                            <tr><td>1</td><td>Cakranegara Selatan</td><td>23</td><td>4,10</td><td>0,18</td></tr>
+                            <tr><td>2</td><td>Cakranegara Barat</td><td>22</td><td>3,30</td><td>0,15</td></tr>
+                            <tr><td>3</td><td>Cakranegara Timur</td><td>13</td><td>3,20</td><td>0,14</td></tr>
+                            <tr><td>4</td><td>Cakranegara Utara</td><td>18</td><td>2,90</td><td>0,13</td></tr>
+                            <tr><td>5</td><td>Sayang-Sayang</td><td>27</td><td>3,60</td><td>0,17</td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </main>
     </div>
 
-    <script>
-        // Data diambil dari dokumen gambar Anda
-        const dataKPU = [
-            { 
-                kecamatan: "KECAMATAN AMPENAN", 
-                totalTPS: 250,
-                kelurahan: [
-                    { n: 1, nama: "Ampenan Selatan", tps: 26, jarak: "9.00", waktu: "0.5" },
-                    { n: 2, nama: "Ampenan Tengah", tps: 32, jarak: "9.00", waktu: "0.5" },
-                    { n: 3, nama: "Pejeruk", tps: 30, jarak: "8.60", waktu: "0.3" },
-                    { n: 4, nama: "Ampenan Utara", tps: 23, jarak: "9.00", waktu: "0.5" },
-                    { n: 5, nama: "Taman Sari", tps: 22, jarak: "9.60", waktu: "0.5" },
-                    { n: 6, nama: "Banjar", tps: 20, jarak: "10.20", waktu: "0.40" },
-                    { n: 7, nama: "Kebun Sari", tps: 25, jarak: "7.50", waktu: "0.29" },
-                    { n: 8, nama: "Pajarakan Karya", tps: 19, jarak: "7.50", waktu: "0.29" },
-                    { n: 9, nama: "Dayan Peken", tps: 25, jarak: "7.70", waktu: "0.32" },
-                    { n: 10, nama: "Bintaro", tps: 28, jarak: "9.80", waktu: "0.35" }
-                ]
-            },
-            {
-                kecamatan: "KECAMATAN CAKRANEGARA",
-                totalTPS: 206,
-                kelurahan: [
-                    { n: 1, nama: "Cakranegara Selatan", tps: 23, jarak: "4.10", waktu: "0.18" },
-                    { n: 2, nama: "Cakranegara Barat", tps: 22, jarak: "3.30", waktu: "0.15" },
-                    { n: 3, nama: "Cakranegara Timur", tps: 13, jarak: "3.20", waktu: "0.14" },
-                    { n: 4, nama: "Cakranegara Utara", tps: 18, jarak: "2.90", waktu: "0.13" },
-                    { n: 5, nama: "Sayang-Sayang", tps: 27, jarak: "3.60", waktu: "0.17" },
-                    { n: 6, nama: "Cakranegara Selatan Baru", tps: 25, jarak: "3.30", waktu: "0.15" },
-                    { n: 7, nama: "Sapta Marga", tps: 19, jarak: "4.50", waktu: "0.21" },
-                    { n: 8, nama: "Cilinaya", tps: 21, jarak: "3.30", waktu: "0.15" },
-                    { n: 9, nama: "Mayura", tps: 19, jarak: "2.50", waktu: "0.10" },
-                    { n: 10, nama: "Karang Taliwang", tps: 19, jarak: "3.00", waktu: "0.12" }
-                ]
-            }
-        ];
-
-        const tableBody = document.getElementById('tableBody');
-
-        dataKPU.forEach(group => {
-            // Render baris grup kecamatan
-            const groupRow = `
-                <tr class="group-row">
-                    <td colspan="2"><i class="fas fa-building-flag"></i> &nbsp; ${group.kecamatan}</td>
-                    <td>${group.totalTPS}</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            `;
-            tableBody.innerHTML += groupRow;
-
-            // Render baris kelurahan
-            group.kelurahan.forEach(kel => {
-                const row = `
-                    <tr>
-                        <td style="color:#95a5a6">${kel.n}</td>
-                        <td>${kel.nama}</td>
-                        <td><strong>${kel.tps}</strong></td>
-                        <td>${kel.jarak}</td>
-                        <td>${kel.waktu}</td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
-        });
-    </script>
 </body>
 </html>
